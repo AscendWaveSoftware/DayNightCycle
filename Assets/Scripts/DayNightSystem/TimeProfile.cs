@@ -24,8 +24,6 @@ public class TimeProfile : ScriptableObject
     [Header("Time & Rotation")]
     [Tooltip("Echte Sekunden pro In-Game-Minute.")]
     [Min(0.01f)] public float RealSecondsPerGameMinute = 1f;
-    [Tooltip("Globale Drehung pro In-Game-Minute (Grad).")]
-    public float LightRotationDegreesPerGameMinute = (1f / (1440f / 4f)) * 360f;
 
     [Header("Phase Switch (Stunden)")]
     public int SunriseHour = 6;

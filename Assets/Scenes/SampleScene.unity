@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 410087040}
   m_IndirectSpecularColor: {r: 0.02861419, g: 0.2950731, b: 0.48665342, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -493,7 +493,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 659419508}
-  - component: {fileID: 659419507}
+  - component: {fileID: 659419509}
+  - component: {fileID: 659419510}
   m_Layer: 0
   m_Name: TimeManager
   m_TagString: Untagged
@@ -501,24 +502,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &659419507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 659419506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05fd4d3e6953537459447f59005419ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeProfile: {fileID: 11400000, guid: f902f570cf61c1043a7d1217c37aeb56, type: 2}
-  globalLight: {fileID: 410087040}
-  minutes: 0
-  hours: 5
-  days: 0
-  tempSecond: 0
 --- !u!4 &659419508
 Transform:
   m_ObjectHideFlags: 0
@@ -534,6 +517,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &659419509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659419506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f39dc73be33a6944197800a7e106064a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: f902f570cf61c1043a7d1217c37aeb56, type: 2}
+  sun: {fileID: 410087040}
+  skyboxMat: {fileID: 2100000, guid: 57480762ef5e557478a34339a77dfea5, type: 2}
+--- !u!114 &659419510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659419506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc22cc5bf0551f14e841d5d4bfc85fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  director: {fileID: 659419509}
+  hours: 0
+  minutes: 0
+  seconds: 0
+  days: 0
+  formatted: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
