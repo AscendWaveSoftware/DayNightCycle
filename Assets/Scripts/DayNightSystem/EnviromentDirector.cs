@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class EnviromentDirector : MonoBehaviour
 {
@@ -7,12 +9,15 @@ public class EnviromentDirector : MonoBehaviour
     [SerializeField] private TimeProfile profile;
     [SerializeField] private Light sun;
     [SerializeField] private Material skyboxMat;
+    [SerializeField] private Volume postVolume;
+    [SerializeField] private Transform cameraTransform;
 
     private ClockService clock;
     private PhaseService phase;
     private SkyboxBlender sky;
     private LightDirector lightDir;
     private TransitionRunner transition = new();
+    private PostDirector post;
 
     private void Awake()
     {
@@ -20,12 +25,16 @@ public class EnviromentDirector : MonoBehaviour
         phase = new PhaseService(profile.SunriseHour, profile.DayHour, profile.SunsetHour, profile.NightHour);
         sky = new SkyboxBlender(skyboxMat);
         lightDir = new LightDirector(sun);
+        post = new PostDirector(postVolume);
 
         clock.HourChanged += h => phase.Update(h);
         phase.PhaseChanged += OnPhaseChanged;
 
         var p0 = phase.Evaluate(clock.Hours);
         ApplyPhaseImmediate(p0);
+
+        var elev01 = ComputeElevation01FromSun();
+        ApplyPost(elev01);
     }
 
     private void Update()
@@ -37,6 +46,9 @@ public class EnviromentDirector : MonoBehaviour
         sun.transform.rotation = SunRotation.FromTime01(clock.TimeOfDay01, Vector3.right);
 
         transition.Tick(Time.deltaTime);
+
+        var elev01 = ComputeElevation01FromSun();
+        ApplyPost(elev01);
     }
 
     private void OnPhaseChanged(DayPhase _prev, DayPhase _next)
@@ -98,5 +110,28 @@ public class EnviromentDirector : MonoBehaviour
                 lightDir.ApplyColor(profile.GradientDayToSunset, 1f);
                 break;
         }
+    }
+
+    private float ComputeElevation01FromSun()
+    {
+        if (sun == null) return 0f;
+
+        float elevationDeg = 90f - Vector3.Angle(sun.transform.forward, Vector3.down);
+
+        return Mathf.Clamp01(Mathf.InverseLerp(-6f, 45f, elevationDeg));
+    }
+
+    private void ApplyPost(float _elev01)
+    {
+        if (post == null || profile == null) return;
+
+        float facing = 0f;
+        if(cameraTransform && sun)
+        {
+            float dot = Vector3.Dot(cameraTransform.forward, -sun.transform.transform.forward);
+            facing = Mathf.Clamp01(Mathf.InverseLerp(0.75f, 0.98f, dot));
+        }
+
+        post.ApplyCinematics(_elev01, facing, profile);
     }
 }

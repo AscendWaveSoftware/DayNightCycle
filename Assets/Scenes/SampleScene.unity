@@ -532,6 +532,8 @@ MonoBehaviour:
   profile: {fileID: 11400000, guid: f902f570cf61c1043a7d1217c37aeb56, type: 2}
   sun: {fileID: 410087040}
   skyboxMat: {fileID: 2100000, guid: 57480762ef5e557478a34339a77dfea5, type: 2}
+  postVolume: {fileID: 832575518}
+  cameraTransform: {fileID: 330585546}
 --- !u!114 &659419510
 MonoBehaviour:
   m_ObjectHideFlags: 0

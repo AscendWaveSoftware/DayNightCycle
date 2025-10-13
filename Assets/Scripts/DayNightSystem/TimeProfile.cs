@@ -35,6 +35,15 @@ public class TimeProfile : ScriptableObject
     [Tooltip("Sekunden für Skybox- und Light-Lerp.")]
     [Min(0.01f)] public float TransitionSeconds = 10f;
 
+    [Header("Post-Processing (Cinematic)")]
+    public Gradient PostColorFilterOverElevation;
+    [FormerlySerializedAs("VignetteColorOverEvaluation")]
+    public Gradient VignetteColorOverElevation;
+    public AnimationCurve PostExposureEVOverElevation;
+    public AnimationCurve BloomIntensityOverElevation;
+    public AnimationCurve VignetteIntensityOverElevation;
+    public bool UseACES = true;
+
     private void OnValidate()
     {
         SunriseHour = Mathf.Clamp(SunriseHour, 0, 23);
