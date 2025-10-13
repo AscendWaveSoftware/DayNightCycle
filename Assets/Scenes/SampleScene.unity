@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.02861419, g: 0.2950731, b: 0.48665342, a: 1}
+  m_IndirectSpecularColor: {r: 0.55001575, g: 0.7961262, b: 0.9678134, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -529,7 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f39dc73be33a6944197800a7e106064a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: f902f570cf61c1043a7d1217c37aeb56, type: 2}
+  profile: {fileID: 11400000, guid: 3289ac403f67fd94fb449dcd0a7ba098, type: 2}
   sun: {fileID: 410087040}
   skyboxMat: {fileID: 2100000, guid: 57480762ef5e557478a34339a77dfea5, type: 2}
   postVolume: {fileID: 832575518}

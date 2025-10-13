@@ -35,14 +35,22 @@ public class TimeProfile : ScriptableObject
     [Tooltip("Sekunden für Skybox- und Light-Lerp.")]
     [Min(0.01f)] public float TransitionSeconds = 10f;
 
-    [Header("Post-Processing (Cinematic)")]
-    public Gradient PostColorFilterOverElevation;
-    [FormerlySerializedAs("VignetteColorOverEvaluation")]
-    public Gradient VignetteColorOverElevation;
-    public AnimationCurve PostExposureEVOverElevation;
-    public AnimationCurve BloomIntensityOverElevation;
-    public AnimationCurve VignetteIntensityOverElevation;
+    [Header("Post-Processing (Cinematic, Time-based)")]
+    [Tooltip("0..1 über den Tag (0 = 00:00, 0.5 = 12:00, 1 = 24:00)")]
+    public Gradient PostColorFilterOverTime;
+    public AnimationCurve PostExposureEVOverTime;
+    public AnimationCurve BloomIntensityOverTime;
+    public AnimationCurve VignetteIntensityOverTime;
+    public Gradient VignetteColorOverTime;
     public bool UseACES = true;
+
+    [Header("Bloom Facing Settings")]
+    [Tooltip("Dot-Wert, ab dem der Facing-Bloom anfängt.")]
+    [Range(-1f, 1f)] public float FacingBloomDotMin = 0.75f;
+    [Tooltip("Dot-Wert, bei dem Facing-Bloom maximal ist.")]
+    [Range(-1f, 1f)] public float FacingBloomDotMax = 0.98f;
+    [Tooltip("Zusätzlicher Bloom-Intensitätsbonus beim maximalem Facing.")]
+    [Min(0f)] public float FacingBloomBonus = 0.6f;
 
     private void OnValidate()
     {

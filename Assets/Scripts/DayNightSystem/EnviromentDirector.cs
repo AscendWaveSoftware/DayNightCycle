@@ -33,8 +33,7 @@ public class EnviromentDirector : MonoBehaviour
         var p0 = phase.Evaluate(clock.Hours);
         ApplyPhaseImmediate(p0);
 
-        var elev01 = ComputeElevation01FromSun();
-        ApplyPost(elev01);
+        ApplyPost();
     }
 
     private void Update()
@@ -47,8 +46,19 @@ public class EnviromentDirector : MonoBehaviour
 
         transition.Tick(Time.deltaTime);
 
-        var elev01 = ComputeElevation01FromSun();
-        ApplyPost(elev01);
+        ApplyPost();
+    }
+
+    private void OnDestroy()
+    {
+        if (clock != null)
+        {
+            clock.HourChanged -= h => phase.Update(h);
+        }
+        if (phase != null)
+        {
+            phase.PhaseChanged -= OnPhaseChanged;
+        }
     }
 
     private void OnPhaseChanged(DayPhase _prev, DayPhase _next)
@@ -112,26 +122,22 @@ public class EnviromentDirector : MonoBehaviour
         }
     }
 
-    private float ComputeElevation01FromSun()
-    {
-        if (sun == null) return 0f;
-
-        float elevationDeg = 90f - Vector3.Angle(sun.transform.forward, Vector3.down);
-
-        return Mathf.Clamp01(Mathf.InverseLerp(-6f, 45f, elevationDeg));
-    }
-
-    private void ApplyPost(float _elev01)
+    private void ApplyPost()
     {
         if (post == null || profile == null) return;
 
         float facing = 0f;
         if(cameraTransform && sun)
         {
-            float dot = Vector3.Dot(cameraTransform.forward, -sun.transform.transform.forward);
-            facing = Mathf.Clamp01(Mathf.InverseLerp(0.75f, 0.98f, dot));
+            float dot = Vector3.Dot(cameraTransform.forward, -sun.transform.forward);
+            facing = Mathf.Clamp01(Mathf.InverseLerp(
+            profile.FacingBloomDotMin,
+            profile.FacingBloomDotMax,
+            dot
+            ));
         }
 
-        post.ApplyCinematics(_elev01, facing, profile);
+        float t01 = TimeSource != null ? TimeSource.TimeOfDay01 : 0f;
+        post.ApplyTime(t01, facing, profile);
     }
 }
