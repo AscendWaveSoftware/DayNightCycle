@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 
 public class EnviromentDirector : MonoBehaviour
 {
     public ClockService TimeSource => clock;
 
     [SerializeField] private TimeProfile profile;
+    public TimeProfile Profile => profile;
     [SerializeField] private Light sun;
     [SerializeField] private Material skyboxMat;
     [SerializeField] private Volume postVolume;

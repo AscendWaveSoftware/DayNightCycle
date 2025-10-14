@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.55001575, g: 0.7961262, b: 0.9678134, a: 1}
+  m_IndirectSpecularColor: {r: 0.3270795, g: 0.29050896, b: 0.32146317, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -495,6 +495,7 @@ GameObject:
   - component: {fileID: 659419508}
   - component: {fileID: 659419509}
   - component: {fileID: 659419510}
+  - component: {fileID: 659419511}
   m_Layer: 0
   m_Name: TimeManager
   m_TagString: Untagged
@@ -552,6 +553,21 @@ MonoBehaviour:
   seconds: 0
   days: 0
   formatted: 
+--- !u!114 &659419511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659419506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c7dae74f8ba44a45b5aa868bd9c9012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Env: {fileID: 659419509}
+  Events:
+  - {fileID: 11400000, guid: e14bff8066e75cf4b81a65eaf4343cc6, type: 2}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,6 +629,7 @@ GameObject:
   - component: {fileID: 1840211855}
   - component: {fileID: 1840211854}
   - component: {fileID: 1840211853}
+  - component: {fileID: 1840211857}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -706,6 +723,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1840211857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840211852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23e41da2094002740814db1a134fc3cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
