@@ -11,15 +11,26 @@ public class CharacterMover : MonoBehaviour
 
     private void Awake()
     {
-        inputSource = inputSourceBehaviour as IMoveInputSource;
-        if (motor == null)
+        // Auto-Wire falls nicht gesetzt
+        if (!motor)
             motor = GetComponent<RigidbodyForceMotor>();
-        if(motor != null && orientation != null)
+        if (!inputSourceBehaviour)
         {
-            var field = typeof(RigidbodyForceMotor).GetField("orientation",
-                            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            field?.SetValue(motor, orientation);
+            inputSourceBehaviour = GetComponent<MonoBehaviour>();
+            foreach(var mb in GetComponents<MonoBehaviour>())
+            {
+                if(mb is IMoveInputSource)
+                {
+                    inputSourceBehaviour = mb;
+                    break;
+                }
+            }
         }
+
+        if (!orientation)
+            orientation = transform;
+
+        inputSource = inputSourceBehaviour as IMoveInputSource;
     }
 
     private void FixedUpdate()

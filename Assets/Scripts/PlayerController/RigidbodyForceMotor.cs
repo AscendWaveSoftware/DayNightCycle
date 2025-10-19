@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RigidbodyForceMotor : MonoBehaviour
 {
+    [Header("Config")]
     [SerializeField] private MovementSettings settings;
     [SerializeField] private Transform orientation;
 
@@ -27,7 +26,7 @@ public class RigidbodyForceMotor : MonoBehaviour
 
         var velocity = rb.velocity;
 
-        // Geschwindigkeit relativ zum Boden d�mpfen (nur horizontal)
+        // Geschwindigkeit relativ zum Boden dämpfen (nur horizontal)
         var horizVel = new Vector3(velocity.x, 0f, velocity.z);
         float damping = isGrounded ? settings.groundDamping : settings.airDamping;
         horizVel = Vector3.Lerp(horizVel, Vector3.zero, damping);

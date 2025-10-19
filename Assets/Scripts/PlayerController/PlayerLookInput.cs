@@ -2,20 +2,20 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
-public class PlayerMoveInput : MonoBehaviour, IMoveInputSource
+public class PlayerLookInput : MonoBehaviour, ILookInputSource
 {
     private PlayerInputManager input;
-    private InputAction move;
+    private InputAction look;
 
     private void OnEnable()
     {
         if (input == null)
             input = new PlayerInputManager();
         input.Enable();
-        move = input.Player.Move;
+        look = input.Player.Look;
     }
 
-    public Vector2 ReadMove() => move.ReadValue<Vector2>();
+    public Vector2 ReadLook() => look.ReadValue<Vector2>();
 
     private void OnDisable() => input.Disable();
 }
