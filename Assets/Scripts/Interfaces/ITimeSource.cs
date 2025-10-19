@@ -1,4 +1,4 @@
-public class ITimeSource
+public interface ITimeSource
 {
     int Hours { get; }
     int Minutes { get; }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Profiling;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
@@ -37,7 +36,7 @@ public class PostDirector
             colorAdj.colorFilter.Override(_p.PostColorFilterOverTime.Evaluate(_t01));
         }
 
-        // Exposure (gedämpft)
+        // Exposure
         if (_p.PostExposureEVOverTime != null)
         {
             float evTarget = _p.PostExposureEVOverTime.Evaluate(_t01);
@@ -46,7 +45,7 @@ public class PostDirector
             colorAdj.postExposure.Override(evSmoothed);
         }
 
-        // Bloom (+ optional Facing-Bonus)
+        // Bloom
         if (bloom != null)
         {
             float baseBloom = _p.BloomIntensityOverTime != null ? _p.BloomIntensityOverTime.Evaluate(_t01) : 0f;

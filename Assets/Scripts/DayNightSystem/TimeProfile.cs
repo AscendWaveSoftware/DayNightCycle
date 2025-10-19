@@ -21,7 +21,7 @@ public class TimeProfile : ScriptableObject
     [FormerlySerializedAs("graddientSunsetToNight")]
     public Gradient GradientSunsetToNight;
 
-    [Header("Time & Rotation")]
+    [Header("Time")]
     [Tooltip("Echte Sekunden pro In-Game-Minute.")]
     [Min(0.01f)] public float RealSecondsPerGameMinute = 1f;
 
@@ -35,7 +35,7 @@ public class TimeProfile : ScriptableObject
     [Tooltip("Sekunden für Skybox- und Light-Lerp.")]
     [Min(0.01f)] public float TransitionSeconds = 10f;
 
-    [Header("Post-Processing (Cinematic, Time-based)")]
+    [Header("Post-Processing (Time-based)")]
     [Tooltip("0..1 über den Tag (0 = 00:00, 0.5 = 12:00, 1 = 24:00)")]
     public Gradient PostColorFilterOverTime;
     public AnimationCurve PostExposureEVOverTime;

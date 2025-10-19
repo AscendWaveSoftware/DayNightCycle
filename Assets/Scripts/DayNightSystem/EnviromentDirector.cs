@@ -19,6 +19,8 @@ public class EnviromentDirector : MonoBehaviour
     private TransitionRunner transition = new();
     private PostDirector post;
 
+    private System.Action<int> _onHourChanged;
+
     private void Awake()
     {
         clock = new ClockService();
@@ -27,7 +29,8 @@ public class EnviromentDirector : MonoBehaviour
         lightDir = new LightDirector(sun);
         post = new PostDirector(postVolume);
 
-        clock.HourChanged += h => phase.Update(h);
+        _onHourChanged = OnHourChanged;
+        clock.HourChanged += _onHourChanged;
         phase.PhaseChanged += OnPhaseChanged;
 
         var p0 = phase.Evaluate(clock.Hours);
@@ -51,15 +54,17 @@ public class EnviromentDirector : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (clock != null)
+        if (clock != null && _onHourChanged != null)
         {
-            clock.HourChanged -= h => phase.Update(h);
+            clock.HourChanged -= _onHourChanged;
         }
         if (phase != null)
         {
             phase.PhaseChanged -= OnPhaseChanged;
         }
     }
+
+    private void OnHourChanged(int _h) => phase.Update(_h);
 
     private void OnPhaseChanged(DayPhase _prev, DayPhase _next)
     {
